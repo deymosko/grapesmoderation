@@ -8,4 +8,4 @@
 **Warning expiration rules:**
 - Warnings expire automatically after **7 days**.
 - Getting a new warning **resets all current timers**.
-- After a player is unbanned *(ban time configured in `warn-common.toml`)*, **all warnings expire in 7 days**.
+- After a player is unbanned *(ban time configured in `moderationmod-common.toml`)*, **all warnings expire in 7 days**.
