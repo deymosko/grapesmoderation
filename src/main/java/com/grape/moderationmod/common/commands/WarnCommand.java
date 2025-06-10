@@ -46,7 +46,7 @@ public class WarnCommand
         source.sendSuccess(() -> Component.literal(Component.translatable("warn.give").getString() + target.getName().getString() + " (" + count + ")"), true);
         target.sendSystemMessage(Component.literal(Component.translatable("warn.got").getString() + count));
 
-        checkBan(target.server, target.getUUID(), target.getName().getString(), count);
+        checkBan(target.server, data, target.getUUID(), target.getName().getString(), count);
         return 1;
     }
 
@@ -56,7 +56,7 @@ public class WarnCommand
         source.sendSuccess(() -> Component.literal(target.getName().getString() + " has " + count + " warnings"), false);
         return 1;
     }
-    private static void checkBan(MinecraftServer server, UUID uuid, String name, int count) {
+    private static void checkBan(MinecraftServer server, WarningsData data, UUID uuid, String name, int count) {
         Map<Integer, Integer> map = WarnConfig.parseDurations();
         if (!map.containsKey(count)) return;
 
@@ -69,6 +69,7 @@ public class WarnCommand
 
         UserBanListEntry banEntry = new UserBanListEntry(profile, new Date(), null, banUntil, "Reached " + count + " warnings");
         banList.add(banEntry);
+        data.setBanExpiration(uuid, banUntil.getTime());
 
         var player = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(uuid);
         if (player != null) {
