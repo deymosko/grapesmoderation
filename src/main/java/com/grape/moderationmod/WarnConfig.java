@@ -32,7 +32,7 @@ public class WarnConfig
                 {
                     int count = Integer.parseInt(split[0]);
                     int days = Integer.parseInt(split[1]);
-                    durations.put(days, count);
+                    durations.put(count, days);
                 }
                 catch(NumberFormatException ignored) {}
             }
